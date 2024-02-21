@@ -1,3 +1,61 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
 h1 {
-  color: dodgerblue;
+  color: black;
+  background-color: #808080;
+  text-align: center;
+  font-size: 2.2rem;
+}
+.book-section {
+  border-bottom: 18px solid blue;
+  background-color: rgb(94, 63, 63);
+  width: clamp(
+    300px,
+    90%,
+    1800px
+  ); /*i'll have auto-fit set on the div child this section can get pretty small because of min value */
+
+  margin: 0.5% auto 0.5% auto; /*create some space between the book section the h1 and the footer  */
+
+  flex-grow: 1;
+
+  font-size: 1.68rem;
+}
+.book-section h3 {
+  /*only section title should be centered */
+
+  height: clamp(2.6%, 4.5%, 6%, 40px);
+  font-size: clamp(1rem, 1.5rem, 56px);
+  text-align: center;
+}
+
+.books-container {
+  /*this will be a grid and the amount of col will change based on space available */
+  background-color: rgb(187, 187, 221);
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.book-card {
+  /*this class will be created via javascript later on keep those styles for now */
+  border: 2px solid firebrick;
+
+  font-size: 1.3rem;
+  height: 350px; /*add a height value to each books so the books-container div fills up the book-section */
+}
+
+footer {
+  background-color: #9a9595;
+  font-size: 1.15rem;
+  text-align: center;
 }
