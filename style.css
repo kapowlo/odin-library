@@ -33,8 +33,9 @@ h1 {
 .book-section h3 {
   /*only section title should be centered */
 
-  height: clamp(2.6%, 4.5%, 6%, 40px);
-  font-size: clamp(1rem, 1.5rem, 56px);
+  /*update removed:clamp function on height and font-size, wasn't doing anything  */
+  height: 4.5%;
+  font-size: 1.5rem;
   text-align: center;
 }
 
@@ -49,7 +50,7 @@ h1 {
 .book-card {
   /*this class will be created via javascript later on keep those styles for now */
   border: 2px solid firebrick;
-
+  line-height: 2.5rem;
   font-size: 1.3rem;
   height: 350px; /*add a height value to each books so the books-container div fills up the book-section */
 }
