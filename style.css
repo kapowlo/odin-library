@@ -1,8 +1,11 @@
+/*reset */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+
+/*GENERAL STYLES */
 body {
   min-height: 100vh;
 
@@ -15,6 +18,8 @@ h1 {
   text-align: center;
   font-size: 2.2rem;
 }
+
+/*BOOK SECTION STYLES */
 .book-section {
   border-bottom: 18px solid blue;
   background-color: rgb(94, 63, 63);
@@ -30,6 +35,7 @@ h1 {
 
   font-size: 1.68rem;
 }
+
 .book-section h3 {
   /*only section title should be centered */
 
@@ -39,6 +45,61 @@ h1 {
   text-align: center;
 }
 
+.book-section button {
+  width: 180px;
+  background-color: rgb(187, 187, 221);
+  padding: 8px 12px;
+  border: 2px solid firebrick;
+  border-radius: 8px;
+  /*center button */
+  display: block;
+  margin: 10px auto 10px auto;
+}
+
+.book-section button:hover,
+button:focus {
+  background-color: rgba(187, 187, 221, 0.859);
+  font-size: 1rem;
+}
+
+/*FORM STYLES */
+.my-form {
+  /*clamp func works nicely on resize, stops form from going below 400px and fills container nicely*/
+  width: clamp(400px, 30%, 1000px);
+  height: 200px;
+  margin: 0 auto 0 auto;
+  padding: 10px 0 0 5px;
+  background-color: rgb(187, 187, 221);
+  opacity: 0.65;
+  font-size: 1rem;
+
+  /*make form a flex container so i can align the div wrapper on the main axis(vertical) */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.my-form > div {
+  /*select all the wrapper divs inside myForm*/
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.my-form input,
+.my-form label {
+  /*select the inputs and labels */
+  background-color: rgb(187, 187, 221);
+  padding: 4px 0 3px 0;
+  margin-bottom: 10px;
+}
+.my-form input {
+  /*control width of inputs only and put space to the right */
+  width: 80%;
+  margin-right: 10px;
+}
+
+/*BOOK CONTAINER AND BOOK CARD STYLES */
 .books-container {
   /*this will be a grid and the amount of col will change based on space available */
   background-color: rgb(187, 187, 221);
@@ -55,6 +116,7 @@ h1 {
   height: 350px; /*add a height value to each books so the books-container div fills up the book-section */
 }
 
+/*FOOTER styles */
 footer {
   background-color: #9a9595;
   font-size: 1.15rem;
