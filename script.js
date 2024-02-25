@@ -77,3 +77,83 @@ function displayCardBook(arr){
 
 // call func and pass myLibrary array which should be full of books since I called addBookToLibrary earlier
 console.log(displayCardBook(myLibrary)); 
+
+//assignment 4 create an event for the button id add-book, once clicked it will bring up a form
+// inside this form i'll have four input fields and a button called confirm or reset/close
+
+const btnAddNewBooks = document.querySelector("#add-book");
+console.log(btnAddNewBooks);
+
+const bookSection=document.querySelector(".book-section"); // ill append the form to book section right under the button
+console.log(bookSection)
+
+btnAddNewBooks.addEventListener("click",(e)=>{
+    //when btn is clicked, create a form, add class my-form,put the form as third child of book-section
+    // create four input fields and labels
+    //create four div wrappers and append them to my form
+    //then appends the input field and label pair to each div wrappers
+    //this click event only works once to prevent multiple form from filling up screen
+    /*todo:Create a submit button add it to form,and create an event for submit button
+    Modify the displayCardBook function
+    
+    */
+    const myForm=document.createElement("form")
+    myForm.classList.add("my-form")
+    bookSection.insertBefore(myForm,bookSection.children[2]); // put the form right after the button
+
+    //create four input fields with labels and set their attributes
+    const inputTitle=document.createElement("input")
+    const labelTitle=document.createElement("label")
+    inputTitle.setAttribute("type","text");
+    inputTitle.setAttribute("id","title");
+    labelTitle.textContent="Title:";
+    labelTitle.setAttribute("for","title");
+
+    const inputAuthor=document.createElement("input")
+    const labelAuthor=document.createElement("label")
+    inputAuthor.setAttribute("type","text");
+    inputAuthor.setAttribute("id","author");
+    labelAuthor.textContent="Author:";
+    labelAuthor.setAttribute("for","author");
+
+
+    const inputPage=document.createElement("input")
+    const labelPage=document.createElement("label")
+    inputPage.setAttribute("type","text");
+    inputPage.setAttribute("id","page");
+    labelPage.textContent="Page:";
+    labelPage.setAttribute("for","page");
+   
+    const inputRead=document.createElement("input")
+    const labelRead=document.createElement("label")
+    inputRead.setAttribute("type","text");
+    inputRead.setAttribute("id","read");
+    labelRead.textContent="Read:";
+    labelRead.setAttribute("for","read");
+   
+    //make 4 div wrappers around each pair of input label append them to my form
+    const wrapper1=document.createElement("div")
+    wrapper1.classList.add("wrapper-1");
+
+    const wrapper2=document.createElement("div")
+    wrapper2.classList.add("wrapper-2");
+
+    const wrapper3=document.createElement("div")
+    wrapper3.classList.add("wrapper-3");
+
+    const wrapper4=document.createElement("div")
+    wrapper4.classList.add("wrapper-4");
+    myForm.append(wrapper4);
+   
+    // append all div wrapper to my form
+    myForm.append(wrapper1,wrapper2,wrapper3,wrapper4); 
+
+    // append all pairs of inputs/label to each div wrappers
+    wrapper1.append(labelTitle,inputTitle);
+    wrapper2.append(labelAuthor,inputAuthor);
+    wrapper3.append(labelPage,inputPage);
+    wrapper4.append(labelRead,inputRead);
+
+    // display elements inside of form in console
+    console.log(myForm);
+},{once:true});
