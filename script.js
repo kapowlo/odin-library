@@ -172,6 +172,15 @@ btnAddNewBooks.addEventListener("click",(e)=>{
          myLibrary.pop();
          
     })
+    //when reset button is pressed it removes any value entered inside all input fields
+    resetBtn.addEventListener("click",(e)=>{
+        e.preventDefault();//prevent button from submitting form data
+        console.log("Reset button was clicked removing all content from input fields")
+        inputTitle.value="";
+        inputAuthor.value="";
+        inputPage.value="";
+        inputRead.value="";
+    })
 
     // display elements inside of form in console
     console.log(myForm);
