@@ -10,10 +10,10 @@ function Book(title,author,page,read){
      
 }
 
- /*books will be added as objects to this array 
+ /*books will be added as objects to this library array after calling a function adBookToLibrary
  [book{title:"Hobbit",author:"J.R.R tolkien"},book2{title:"player one",author"Ernest Cline""}]*/
-const myLibrary =[];
-
+ const myLibrary =[];
+ 
 function addBookToLibrary(...bookItem){
     //accepts an indefinite number of books and adds books to myLibrary array 
     // spread the array of books,so each book gets added properly...better than using a loop to manually add each of them to myLibrary
@@ -21,42 +21,8 @@ function addBookToLibrary(...bookItem){
     return myLibrary; // return array containing the books
 }
 
-
-
-// making new books
- const book1 = new Book("Hobbit","J.R.R Tolkien",295,"not read yet");
- 
- const book2 = new Book("Player One","Ernest Cline",614,"yes I read it");
-
- const book3 = new Book("Lost Light","Michael Connelly",385,"not read yet");
-
- const book4 = new Book("Frankenstein","Mary Shelley",280,"yes I read it");
-
- const book5 = new Book("Foundation","Isaac asimov",255,"yes I read it");
-
- const book6 = new Book("Game Of Thrones","George R.R Martin",865,"not read yet");
-
- const book7 = new Book("Catching Fire","Suzanne Collins",402,"yes I read it");
-
- const book8 = new Book("Better Never To Have Been","David Benatar",250,"not read yet");
-
- const book9 = new Book("HTML And CSS Design and build websites","Jon Duckett ",512,"not read yet");
-
- const book10 = new Book("One piece","Eiichiro Oda",150,"yes I read it");
-
- const book11 = new Book("Harry Potter and the Chamber Of Secrets","J.K Rowling",450,"not read yet");
-
- const book12 = new Book("Headfirst Javascript"," Elisabeth Robson And Eric Freeman",1387,"not read yet");
-
-
- 
-console.log(addBookToLibrary(book1,book2,book3,book4,book5,book6,book7,book8,book9,book10,book11,book12)); // pass the new books to the function that will add it to my library
-console.log("this is what i have in my personal library", myLibrary); // shows what I have in my array
-console.log(book1.info());//log info about the book
-console.log(book2.info());//log info about the book
-
-
-const booksContainer = document.querySelector(".books-container");// will use append/appendChild(foo) to add the bookCards to it
+// will use append/appendChild(foo) inside displayCardBook to add the bookCards to it
+const booksContainer = document.querySelector(".books-container");
 console.log(booksContainer);
 
 
@@ -75,12 +41,10 @@ function displayCardBook(arr){
    return booksContainer;
 }
 
-// call func and pass myLibrary array which should be full of books since I called addBookToLibrary earlier
-console.log(displayCardBook(myLibrary)); 
 
-//assignment 4 create an event for the button id add-book, once clicked it will bring up a form
-// inside this form i'll have four input fields and a button called confirm or reset/close
-
+/*assignment 4 todo: user input inside of form field should be retrieved via getelementid. and i should get each inputs value
+and, and when i create new book object i will pass the input values
+*/
 const btnAddNewBooks = document.querySelector("#add-book");
 console.log(btnAddNewBooks);
 
@@ -89,14 +53,12 @@ console.log(bookSection)
 
 btnAddNewBooks.addEventListener("click",(e)=>{
     //when btn is clicked, create a form, add class my-form,put the form as third child of book-section
-    // create four input fields and labels
-    //create four div wrappers and append them to my form
+    //create four input fields and labels, create four div wrappers and append them to my form
     //then appends the input field and label pair to each div wrappers
-    //this click event only works once to prevent multiple form from filling up screen
-    /*todo:Create a submit button add it to form,and create an event for submit button
-    Modify the displayCardBook function
+    //creates submit and reset buttons. submit buttons retrieves value of each input fields
+    //creates a new book object then calls addBookToLibrary then displayCardBook
+    //once everything is done the form is hidden
     
-    */
     const myForm=document.createElement("form")
     myForm.classList.add("my-form")
     bookSection.insertBefore(myForm,bookSection.children[2]); // put the form right after the button
@@ -154,6 +116,62 @@ btnAddNewBooks.addEventListener("click",(e)=>{
     wrapper3.append(labelPage,inputPage);
     wrapper4.append(labelRead,inputRead);
 
+
+    //create submit btn add class 
+    const submitBtn =document.createElement("button");
+    submitBtn.classList.add("btn-submit");
+    submitBtn.textContent="Submit";
+    
+
+    // create reset button add class
+    const resetBtn = document.createElement("button");
+    resetBtn.classList.add("btn-reset");
+    resetBtn.textContent="Reset"
+
+    // create wrapper for buttons 
+    const formBtnWrapper=document.createElement("div");
+    formBtnWrapper.classList.add("form-btn-wrapper")
+
+    //append both buttons two wrapper
+    formBtnWrapper.append(submitBtn,resetBtn);
+
+    // append wrapper div to form
+    myForm.append(formBtnWrapper);
+
+    //add event for submit button and reset button both e.preventDefault()
+    // method on submit btn to stop default behavior of submitting form data 
+    // reset button all input field values should be reset to empty string
+
+    submitBtn.addEventListener("click",(e)=>{
+        e.preventDefault()// prevents form from submitting data
+        // retrieve the values of the input fields
+       let inputVal1=document.getElementById('title').value
+       let inputVal2=document.getElementById('author').value
+       let inputVal3=document.getElementById('page').value
+       let inputVal4=document.getElementById('read').value
+        console.log(inputVal1,inputVal2,inputVal3,inputVal4);
+        // make new book object from Book constructor pass each input values as argument 
+        const book=new Book(inputVal1,inputVal2,inputVal3,inputVal4);
+       
+        // add this book to library array by calling function,each book is an object
+        console.log(addBookToLibrary(book));
+
+        //display this as book card by calling function displayCardBook and passing library
+        console.log(displayCardBook(myLibrary));
+
+        //note form should be hidden after everything is done
+        myForm.style.display = "none";
+
+        // test to see if i can loop and what it displays  keep this for now
+        for(let i=0;i<myLibrary.length;i++){
+            console.log("looping through library",(myLibrary[i]));
+        }
+
+         //book is added twice maybe delete the book object after(delete previous book)
+         console.log("deleting book object",);
+         
+    })
+
     // display elements inside of form in console
     console.log(myForm);
-},{once:true});
+});
