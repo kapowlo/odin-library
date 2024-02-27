@@ -23,7 +23,7 @@ function addBookToLibrary(...bookItem){
 
 // will use append/appendChild(foo) inside displayCardBook to add the bookCards to it
 const booksContainer = document.querySelector(".books-container");
-console.log(booksContainer);
+
 
 
 function displayCardBook(arr){
@@ -38,12 +38,11 @@ function displayCardBook(arr){
         
     }
     console.log(`the length of the array is ${arr.length}`);
-   return booksContainer;
+    return booksContainer;
 }
 
 
-/*assignment 4 todo: user input inside of form field should be retrieved via getelementid. and i should get each inputs value
-and, and when i create new book object i will pass the input values
+/*assignment 4 todo:make a reset button
 */
 const btnAddNewBooks = document.querySelector("#add-book");
 console.log(btnAddNewBooks);
@@ -167,8 +166,10 @@ btnAddNewBooks.addEventListener("click",(e)=>{
             console.log("looping through library",(myLibrary[i]));
         }
 
-         //book is added twice maybe delete the book object after(delete previous book)
-         console.log("deleting book object",);
+
+         //solves bug where the same book would appear twice
+         console.log("popping the book from my library....to avoid duplicate showing up",);
+         myLibrary.pop();
          
     })
 
