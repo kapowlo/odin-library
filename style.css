@@ -45,7 +45,8 @@ h1 {
   text-align: center;
 }
 
-.book-section button {
+.book-section > button {
+  /*only add new book button will receive these styles as it is a direct children */
   width: 180px;
   background-color: rgb(187, 187, 221);
   padding: 8px 12px;
@@ -56,9 +57,12 @@ h1 {
   margin: 10px auto 10px auto;
 }
 
-.book-section button:hover,
+.book-section > button:hover,
 button:focus {
+  /*only add new book button will receive these styles as it is a direct children */
   background-color: rgba(187, 187, 221, 0.859);
+  border: none;
+  box-shadow: 0px 9px 30px rgba(10, 20, 3, 0.3);
   font-size: 1rem;
 }
 
@@ -66,9 +70,9 @@ button:focus {
 .my-form {
   /*clamp func works nicely on resize, stops form from going below 400px and fills container nicely*/
   width: clamp(400px, 30%, 1000px);
-  height: 200px;
+  height: 250px;
   margin: 0 auto 0 auto;
-  padding: 10px 0 0 5px;
+  padding: 20px 0 0 5px;
   background-color: rgb(187, 187, 221);
   opacity: 0.65;
   font-size: 1rem;
@@ -76,7 +80,7 @@ button:focus {
   /*make form a flex container so i can align the div wrapper on the main axis(vertical) */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .my-form > div {
@@ -97,6 +101,39 @@ button:focus {
   /*control width of inputs only and put space to the right */
   width: 80%;
   margin-right: 10px;
+}
+
+.my-form .form-btn-wrapper {
+  /*select div that wraps both submit and reset button */
+
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.my-form .btn-submit,
+.my-form .btn-reset {
+  /*selects the buttons inside form */
+  font-weight: 900;
+  width: 180px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  background-color: #5e3f3f;
+}
+.my-form .btn-submit {
+  color: #06fc06;
+}
+.my-form .btn-reset {
+  color: #f40101;
+}
+
+.my-form .btn-submit:hover,
+.my-form .btn-submit:focus {
+  opacity: 0.85;
+  box-shadow: 0px 9px 30px rgba(5, 255, 51, 0.9);
+}
+.my-form .btn-reset:hover,
+.my-form .btn-reset:focus {
+  box-shadow: 0px 9px 30px rgba(255, 5, 34, 0.9);
 }
 
 /*BOOK CONTAINER AND BOOK CARD STYLES */
