@@ -5,6 +5,18 @@
   box-sizing: border-box;
 }
 
+:root {
+  --main-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.22),
+    1px 0px 0px 0px rgba(0, 0, 0, 0.22), 1px 2px 0px 0px rgba(0, 0, 0, 0.22),
+    2px 1px 0px 0px rgba(0, 0, 0, 0.22), 2px 3px 0px 0px rgba(0, 0, 0, 0.22),
+    3px 2px 0px 0px rgba(0, 0, 0, 0.22), 3px 4px 0px 0px rgba(0, 0, 0, 0.22),
+    4px 3px 0px 0px rgba(0, 0, 0, 0.22), 4px 5px 0px 0px rgba(0, 0, 0, 0.22),
+    5px 4px 0px 0px rgba(0, 0, 0, 0.22), 5px 6px 0px 0px rgba(0, 0, 0, 0.22),
+    6px 5px 0px 0px rgba(0, 0, 0, 0.22), 6px 7px 0px 0px rgba(0, 0, 0, 0.22),
+    7px 6px 0px 0px rgba(0, 0, 0, 0.22), 7px 8px 0px 0px rgba(0, 0, 0, 0.22),
+    8px 7px 0px 0px rgba(0, 0, 0, 0.22);
+}
+
 /*GENERAL STYLES */
 body {
   min-height: 100vh;
@@ -158,6 +170,25 @@ button:focus {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.btn-toggle-read {
+  /*target the button that toggle the read status */
+  background-color: rgb(175, 168, 168);
+  padding: 12px 8px;
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 4px;
+
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.book-card button:hover,
+.book-card button:focus {
+  /*applies box shadow to all buttons inside of book-card div */
+  box-shadow: var(--main-box-shadow);
+}
+
 .btn-remove-book {
   /*style the button inside of book card*/
   background-color: firebrick;
