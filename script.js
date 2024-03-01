@@ -10,6 +10,24 @@ function Book(title,author,page,read){
      
 }
 
+// this method will create a button called removeBookBtn,use dom to create button add class and text content to it
+//call the method inside of submit button event 
+Book.prototype.removeBooks=function(){
+    console.log("removing ",this.title, "from book-container div ");
+    removeBookBtn=document.createElement("button");
+    removeBookBtn.classList.add("btn-remove-book");
+    removeBookBtn.textContent="Remove Book";
+
+    // add event for removeBookBtn
+    removeBookBtn.addEventListener("click",(e)=>{
+        /* const childNodesArray = Array.from(booksContainer.childNodes);  */
+        console.log("User clicked on Remove Books button")
+        console.log("I just removed",this.title)
+        e.target.parentElement.remove() //removes the parent element of the eventObject(e)
+    })
+}
+
+
  /*books will be added as objects to this library array after calling a function adBookToLibrary
  [book{title:"Hobbit",author:"J.R.R tolkien"},book2{title:"player one",author"Ernest Cline""}]*/
  const myLibrary =[];
@@ -33,7 +51,8 @@ function displayCardBook(arr){
     for(let i=0;i<arr.length;i++){
         const bookCards=document.createElement("div");
         bookCards.classList.add("book-card");
-        bookCards.textContent =arr[i].info(); 
+        bookCards.textContent =arr[i].info();
+        bookCards.append(removeBookBtn)// append the remove button to each bookCards div 
         booksContainer.appendChild(bookCards);
         
     }
@@ -152,14 +171,16 @@ btnAddNewBooks.addEventListener("click",(e)=>{
         // make new book object from Book constructor pass each input values as argument 
         const book=new Book(inputVal1,inputVal2,inputVal3,inputVal4);
        
+        // HERE add lines that calls the method removeBooks()
+        book.removeBooks();
         // add this book to library array by calling function,each book is an object
         console.log(addBookToLibrary(book));
 
         //display this as book card by calling function displayCardBook and passing library
         console.log(displayCardBook(myLibrary));
 
-        //note form should be hidden after everything is done
-        myForm.style.display = "none";
+        //removes the form element from the dom better than hiding it...since I am re-creating the form every time I click add new book
+        myForm.remove();
 
         // test to see if i can loop and what it displays  keep this for now
         for(let i=0;i<myLibrary.length;i++){
