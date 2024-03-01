@@ -151,6 +151,23 @@ button:focus {
   line-height: 2.5rem;
   font-size: 1.3rem;
   height: 350px; /*add a height value to each books so the books-container div fills up the book-section */
+  padding: 0 2%;
+
+  /*make the book-card a flex container so I can align button and text easily */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.btn-remove-book {
+  /*style the button inside of book card*/
+  background-color: firebrick;
+  padding: 8px 10px;
+  margin-bottom: 0.5rem;
+  width: 99%;
+  border-radius: 4px;
+
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 /*FOOTER styles */
