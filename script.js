@@ -3,7 +3,7 @@ function Book(title,author,page,read){
     this.title=title; 
     this.author=author; 
     this.page=page; 
-    this.read=read;
+    this.read=read.toLowerCase(); // make it all lower case
     this.info=function(){
         return `The ${this.title} by ${this.author} , ${this.page} pages, ${this.read}`
     };
@@ -20,12 +20,41 @@ Book.prototype.removeBooks=function(){
 
     // add event for removeBookBtn
     removeBookBtn.addEventListener("click",(e)=>{
-        /* const childNodesArray = Array.from(booksContainer.childNodes);  */
-        console.log("User clicked on Remove Books button")
-        console.log("I just removed",this.title)
+        console.log("User clicked on Remove Books button");
+        console.log("I just removed",this.title);
         e.target.parentElement.remove() //removes the parent element of the eventObject(e)
     })
 }
+
+// this method will create a button toggleReadBtn, when clicked it will change it's text content based flagBoolean's value
+//initial value will be true
+Book.prototype.toggleRead=function(){
+    toggleReadBtn=document.createElement("button");
+    toggleReadBtn.classList.add("btn-toggle-read");
+    toggleReadBtn.textContent="Click to toggle book status to read or not read";
+    let flagBoolean=true;//will switch its value inside btn event
+
+
+    // create event for toggleReadBtn ,it will toggle flag variable and change button bg color and text content based
+    //on true/false 
+    toggleReadBtn.addEventListener("click",(e)=>{
+        //when user clicks on the button it switches up the value of flag variable
+        flagBoolean=!flagBoolean;
+        if(flagBoolean){
+            // if true text content yes and btn color =blue
+            // e is the event object I want only that specific button to change not all of them
+            e.target.textContent="Book status read:yes";
+            e.target.style.backgroundColor="dodgerblue";
+        }
+        else if(!flagBoolean){
+            // if false text content no and btn color =green
+            e.target.textContent="Book status read:no";
+            e.target.style.backgroundColor="green";
+        }
+    })
+    
+}
+
 
 
  /*books will be added as objects to this library array after calling a function adBookToLibrary
@@ -52,7 +81,7 @@ function displayCardBook(arr){
         const bookCards=document.createElement("div");
         bookCards.classList.add("book-card");
         bookCards.textContent =arr[i].info();
-        bookCards.append(removeBookBtn)// append the remove button to each bookCards div 
+        bookCards.append(toggleReadBtn,removeBookBtn)// append the remove button and toggleReadBtn to each bookCards div 
         booksContainer.appendChild(bookCards);
         
     }
@@ -178,6 +207,11 @@ btnAddNewBooks.addEventListener("click",(e)=>{
         
             // HERE add lines that calls the method removeBooks()
             book.removeBooks();
+
+            // here add line that calls method toggleRead()
+            book.toggleRead();
+
+
             // add this book to library array by calling function,each book is an object
             console.log(addBookToLibrary(book));
 
