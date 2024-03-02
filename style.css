@@ -139,7 +139,7 @@ button:focus {
   /*select the inputs and labels */
   background-color: rgb(187, 187, 221);
   padding: 4px 0 3px 0;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 .my-form input {
   /*control width of inputs only and put space to the right */
@@ -149,6 +149,8 @@ button:focus {
 
 .my-form .form-btn-wrapper {
   /*select div that wraps both submit and reset button */
+  margin-top: auto;
+  margin-bottom: auto;
 
   display: flex;
   justify-content: space-evenly;
