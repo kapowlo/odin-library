@@ -89,15 +89,13 @@ function displayCardBook(arr){
 }
 
 
-/*assignment 6 todo:Add a button on each book’s display to change its read status
-*/
 const btnAddNewBooks = document.querySelector("#add-book");
 console.log(btnAddNewBooks);
 
 const bookSection=document.querySelector(".book-section"); // ill append the form to book section right under the button
 console.log(bookSection)
 
-btnAddNewBooks.addEventListener("click",(e)=>{
+btnAddNewBooks.addEventListener("click",()=>{
     //when btn is clicked, create a form, add class my-form,put the form as third child of book-section
     //create three input fields and labels, create three div wrappers and append them to my form
     //then appends the input field and label pair to each div wrappers
@@ -137,12 +135,6 @@ btnAddNewBooks.addEventListener("click",(e)=>{
         labelPage.textContent="Page:";
         labelPage.setAttribute("for","page");
     
-        /* const inputRead=document.createElement("input")
-        const labelRead=document.createElement("label")
-        inputRead.setAttribute("type","text");
-        inputRead.setAttribute("id","read");
-        labelRead.textContent="Read:";
-        labelRead.setAttribute("for","read"); */
     
         //make 3 div wrappers around each pair of input label append them to my form
         const wrapper1=document.createElement("div")
@@ -154,9 +146,6 @@ btnAddNewBooks.addEventListener("click",(e)=>{
         const wrapper3=document.createElement("div")
         wrapper3.classList.add("wrapper-3");
 
-       /*  const wrapper4=document.createElement("div")
-        wrapper4.classList.add("wrapper-4");
-        myForm.append(wrapper4); */
     
         // append all div wrapper to my form
         myForm.append(wrapper1,wrapper2,wrapper3); 
@@ -194,10 +183,10 @@ btnAddNewBooks.addEventListener("click",(e)=>{
         submitBtn.addEventListener("click",(e)=>{
             e.preventDefault()// prevents form from submitting data
             // retrieve the values of the input fields
-        let inputVal1=document.getElementById('title').value
-        let inputVal2=document.getElementById('author').value
-        let inputVal3=document.getElementById('page').value
-       
+            let inputVal1=document.getElementById('title').value
+            let inputVal2=document.getElementById('author').value
+            let inputVal3=document.getElementById('page').value
+        
             console.log(inputVal1,inputVal2,inputVal3);
             // make new book object from Book constructor pass each input values as argument 
             const book=new Book(inputVal1,inputVal2,inputVal3);
