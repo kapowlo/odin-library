@@ -1,11 +1,10 @@
 
-function Book(title,author,page,read){
+function Book(title,author,page){
     this.title=title; 
     this.author=author; 
     this.page=page; 
-    this.read=read.toLowerCase(); // make it all lower case
     this.info=function(){
-        return `The ${this.title} by ${this.author} , ${this.page} pages, ${this.read}`
+        return `The ${this.title} by ${this.author} , ${this.page} pages`
     };
      
 }
@@ -31,7 +30,7 @@ Book.prototype.removeBooks=function(){
 Book.prototype.toggleRead=function(){
     toggleReadBtn=document.createElement("button");
     toggleReadBtn.classList.add("btn-toggle-read");
-    toggleReadBtn.textContent="Click to toggle book status to read or not read";
+    toggleReadBtn.textContent="Change book status";
     let flagBoolean=true;//will switch its value inside btn event
 
 
@@ -100,7 +99,7 @@ console.log(bookSection)
 
 btnAddNewBooks.addEventListener("click",(e)=>{
     //when btn is clicked, create a form, add class my-form,put the form as third child of book-section
-    //create four input fields and labels, create four div wrappers and append them to my form
+    //create three input fields and labels, create three div wrappers and append them to my form
     //then appends the input field and label pair to each div wrappers
     //creates submit and reset buttons. submit buttons retrieves value of each input fields
     //creates a new book object then calls addBookToLibrary then displayCardBook
@@ -115,7 +114,7 @@ btnAddNewBooks.addEventListener("click",(e)=>{
         const myForm=document.createElement("form")
         myForm.classList.add("my-form")
         bookSection.insertBefore(myForm,bookSection.children[2]); // put the form right after the button
-        //create four input fields with labels and set their attributes
+        //create three input fields with labels and set their attributes
         const inputTitle=document.createElement("input")
         const labelTitle=document.createElement("label")
         inputTitle.setAttribute("type","text");
@@ -138,14 +137,14 @@ btnAddNewBooks.addEventListener("click",(e)=>{
         labelPage.textContent="Page:";
         labelPage.setAttribute("for","page");
     
-        const inputRead=document.createElement("input")
+        /* const inputRead=document.createElement("input")
         const labelRead=document.createElement("label")
         inputRead.setAttribute("type","text");
         inputRead.setAttribute("id","read");
         labelRead.textContent="Read:";
-        labelRead.setAttribute("for","read");
+        labelRead.setAttribute("for","read"); */
     
-        //make 4 div wrappers around each pair of input label append them to my form
+        //make 3 div wrappers around each pair of input label append them to my form
         const wrapper1=document.createElement("div")
         wrapper1.classList.add("wrapper-1");
 
@@ -155,19 +154,17 @@ btnAddNewBooks.addEventListener("click",(e)=>{
         const wrapper3=document.createElement("div")
         wrapper3.classList.add("wrapper-3");
 
-        const wrapper4=document.createElement("div")
+       /*  const wrapper4=document.createElement("div")
         wrapper4.classList.add("wrapper-4");
-        myForm.append(wrapper4);
+        myForm.append(wrapper4); */
     
         // append all div wrapper to my form
-        myForm.append(wrapper1,wrapper2,wrapper3,wrapper4); 
+        myForm.append(wrapper1,wrapper2,wrapper3); 
 
         // append all pairs of inputs/label to each div wrappers
         wrapper1.append(labelTitle,inputTitle);
         wrapper2.append(labelAuthor,inputAuthor);
         wrapper3.append(labelPage,inputPage);
-        wrapper4.append(labelRead,inputRead);
-
 
         //create submit btn add class 
         const submitBtn =document.createElement("button");
@@ -200,10 +197,10 @@ btnAddNewBooks.addEventListener("click",(e)=>{
         let inputVal1=document.getElementById('title').value
         let inputVal2=document.getElementById('author').value
         let inputVal3=document.getElementById('page').value
-        let inputVal4=document.getElementById('read').value
-            console.log(inputVal1,inputVal2,inputVal3,inputVal4);
+       
+            console.log(inputVal1,inputVal2,inputVal3);
             // make new book object from Book constructor pass each input values as argument 
-            const book=new Book(inputVal1,inputVal2,inputVal3,inputVal4);
+            const book=new Book(inputVal1,inputVal2,inputVal3);
         
             // HERE add lines that calls the method removeBooks()
             book.removeBooks();
@@ -239,7 +236,7 @@ btnAddNewBooks.addEventListener("click",(e)=>{
             inputTitle.value="";
             inputAuthor.value="";
             inputPage.value="";
-            inputRead.value="";
+            
         })
     }
 });
