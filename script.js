@@ -176,12 +176,18 @@ btnAddNewBooks.addEventListener("click",()=>{
         // append wrapper div to form
         myForm.append(formBtnWrapper);
 
+
         //add event for submit button and reset button both e.preventDefault()
         // method on submit btn to stop default behavior of submitting form data 
         // reset button all input field values should be reset to empty string
 
         submitBtn.addEventListener("click",(e)=>{
             e.preventDefault()// prevents form from submitting data
+              // if any of the input fields are empty submit button wont work,because return will exit out of submitbtn event
+            if(inputTitle.value===""||inputAuthor.value===""||inputPage.value===""){
+                alert("please fill out the form completely!")
+                return;
+            }
             // retrieve the values of the input fields
             let inputVal1=document.getElementById('title').value
             let inputVal2=document.getElementById('author').value
