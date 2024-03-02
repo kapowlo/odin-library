@@ -64,7 +64,6 @@ section.library-instructions p {
 }
 /*BOOK SECTION STYLES */
 .book-section {
-  background-color: rgb(133, 76, 11);
   width: clamp(
     300px,
     90%,
@@ -81,8 +80,6 @@ section.library-instructions p {
 }
 
 .book-section h3 {
-  /*only section title should be centered */
-
   /*update removed:clamp function on height and font-size, wasn't doing anything  */
   height: 4.5%;
   font-size: 1.5rem;
@@ -185,16 +182,15 @@ button:focus {
 /*BOOK CONTAINER AND BOOK CARD STYLES */
 .books-container {
   /*this will be a grid and the amount of col will change based on space available */
-  border-top: 4px solid black;
-  background-color: rgb(144, 82, 12);
-
+  border-top: 4px dotted black;
+  padding-top: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem; /*gap for cols and rows */
 }
 
 .book-card {
-  /*this class will be created via javascript later on keep those styles for now */
+  /*this class will be created via javascript*/
   border: 4px solid firebrick;
   background-color: bisque;
   height: 350px; /*add a height value to each books so the books-container div fills up the book-section */
