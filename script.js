@@ -1,58 +1,56 @@
 
-function Book(title,author,page){
-    this.title=title; 
-    this.author=author; 
-    this.page=page; 
-    this.info=function(){
-        return `The ${this.title} by ${this.author} , ${this.page} pages`
+function Book(title, author, page) {
+    this.title = title;
+    this.author = author;
+    this.page = page;
+    this.info = function () {
+        return `The ${this.title} by ${this.author}, ${this.page} pages`;
     };
-     
 }
 
-// this method will create a button called removeBookBtn,use dom to create button add class and text content to it
-//call the method inside of submit button event 
-Book.prototype.removeBooks=function(){
-    console.log("removing ",this.title, "from book-container div ");
-    removeBookBtn=document.createElement("button");
-    removeBookBtn.classList.add("btn-remove-book");
-    removeBookBtn.textContent="Remove Book";
-
-    // add event for removeBookBtn
-    removeBookBtn.addEventListener("click",(e)=>{
-        console.log("User clicked on Remove Books button");
-        console.log("I just removed",this.title);
-        e.target.parentElement.remove() //removes the parent element of the eventObject(e)
-    })
-}
-
-// this method will create a button toggleReadBtn, when clicked it will change it's text content based flagBoolean's value
-//initial value will be true
-Book.prototype.toggleRead=function(){
-    toggleReadBtn=document.createElement("button");
-    toggleReadBtn.classList.add("btn-toggle-read");
-    toggleReadBtn.textContent="Change book status";
-    let flagBoolean=true;//will switch its value inside btn event
 
 
-    // create event for toggleReadBtn ,it will toggle flag variable and change button bg color and text content based
-    //on true/false 
-    toggleReadBtn.addEventListener("click",(e)=>{
-        //when user clicks on the button it switches up the value of flag variable
-        flagBoolean=!flagBoolean;
-        if(flagBoolean){
-            // if true text content yes and btn color =blue
-            // e is the event object I want only that specific button to change not all of them
-            e.target.textContent="Book status read:yes";
-            e.target.style.backgroundColor="dodgerblue";
-        }
-        else if(!flagBoolean){
-            // if false text content no and btn color =green
-            e.target.textContent="Book status read:no";
-            e.target.style.backgroundColor="green";
-        }
-    })
+Book.prototype.removeBooks = function () {
+    // Create a "Remove Book" button with an event listener that removes the specific book card div.
+    //return means i can access removeBookBtn elsewhere in my code when calling method removebooks()
     
-}
+    console.log("removing ", this.title, "from book-container div ");
+    const removeBookBtn = document.createElement("button");
+    removeBookBtn.classList.add("btn-remove-book");
+    removeBookBtn.textContent = "Remove Book";
+
+    removeBookBtn.addEventListener("click", (e) => {
+        console.log("User clicked on Remove Books button");
+        console.log("I just removed", this.title);
+        e.target.parentElement.remove();
+    });
+
+    return removeBookBtn;
+};
+
+Book.prototype.toggleRead = function () {
+    // // Create a "Toggle Read" button with a flag variable. The event toggles the flag's value,
+    //changes the button text and background color accordingly (true=blue, false=green).
+    //return value means i can access toggleReadBtn's elsewhere in the code when calling method toggleRead()
+   
+    const toggleReadBtn = document.createElement("button");
+    toggleReadBtn.classList.add("btn-toggle-read");
+    toggleReadBtn.textContent = "Change book status";
+    let flagBoolean = true;
+
+    toggleReadBtn.addEventListener("click", (e) => {
+        flagBoolean = !flagBoolean;
+        if (flagBoolean) {
+            e.target.textContent = "Book status read: yes";
+            e.target.style.backgroundColor = "dodgerblue";
+        } else {
+            e.target.textContent = "Book status read: no";
+            e.target.style.backgroundColor = "green";
+        }
+    });
+
+    return toggleReadBtn;
+};
 
 
 
@@ -73,13 +71,27 @@ const booksContainer = document.querySelector(".books-container");
 
 
 function displayCardBook(arr){
+    //forEach loop fixes bug:whenever submit btn was pressed i would get a duplicate book
+    //the foreach loops through the node list and removes a bookcards div everytime(the extra one)
+    
+    const removeBookCardDiv=document.querySelectorAll(".book-card");
+    removeBookCardDiv.forEach(book=>{
+        book.remove()
+    })
     //loop through array create div element and attach a class book-card
-    // the text content of each div will be the keys and value of the objects
+    // the text content of each div will be book.info() which stores the title author and page information
+    //calling methods toggleRead() and removeBooks() fixes bug where my bookcard divs did not have buttons after the forEach loop
     //append each book cards to booksContainer div
+
     for(let i=0;i<arr.length;i++){
         const bookCards=document.createElement("div");
         bookCards.classList.add("book-card");
         bookCards.textContent =arr[i].info();
+
+        // call the toggleRead() and removeBooks () methods on each book object of the arr.
+        const toggleReadBtn = arr[i].toggleRead();
+        const removeBookBtn = arr[i].removeBooks();
+
         bookCards.append(toggleReadBtn,removeBookBtn)// append the remove button and toggleReadBtn to each bookCards div 
         booksContainer.appendChild(bookCards);
         
@@ -101,7 +113,7 @@ btnAddNewBooks.addEventListener("click",()=>{
     //then appends the input field and label pair to each div wrappers
     //creates submit and reset buttons. submit buttons retrieves value of each input fields
     //creates a new book object then calls addBookToLibrary then displayCardBook
-    //once everything is done the form is hidden
+    //once everything is done the form is removed
     
    
     //conditional test if form already exists don't recreate it,don't execute the if block
@@ -176,11 +188,7 @@ btnAddNewBooks.addEventListener("click",()=>{
         // append wrapper div to form
         myForm.append(formBtnWrapper);
 
-
-        //add event for submit button and reset button both e.preventDefault()
-        // method on submit btn to stop default behavior of submitting form data 
-        // reset button all input field values should be reset to empty string
-
+        
         submitBtn.addEventListener("click",(e)=>{
             e.preventDefault()// prevents form from submitting data
               // if any of the input fields are empty submit button wont work,because return will exit out of submitbtn event
@@ -218,10 +226,6 @@ btnAddNewBooks.addEventListener("click",()=>{
                 console.log("looping through library",(myLibrary[i]));
             }
 
-
-            //solves bug where the same book would appear twice
-            console.log("popping the book from my library....to avoid duplicate showing up",);
-            myLibrary.pop();
             
         })
         //when reset button is pressed it removes any value entered inside all input fields
