@@ -195,7 +195,7 @@ button:focus {
   background-color: bisque;
   height: 350px; /*add a height value to each books so the books-container div fills up the book-section */
   padding: 0 2%;
-
+  overflow-x: hidden;
   line-height: 2.5rem;
   font-size: 1.3rem;
   /*make the book-card a flex container so I can align button and text easily */
